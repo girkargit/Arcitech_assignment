@@ -17,7 +17,7 @@ class TestSignUp(BaseClass):
         obj.login_signup_button().click()
         obj.signup_button().click()
         obj.student_profile().click()
-        obj.email_input().send_keys("pashtesuraj157@gmail.com")
+        obj.email_input().send_keys("test@gmail.com")
         obj.password_input().send_keys("Test@123")
         obj.register_action().click()
         obj.confirm_action().click()

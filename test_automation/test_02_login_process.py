@@ -34,6 +34,9 @@ class TestCreateProfile(BaseClass):
             print("-----No Login page is present -----")
 
     def test_create_profile(self, getData):
+        """
+        We can perform negative data testing using excel sheet,
+        """
         print(getData)
         obj = WebElement(self.driver)
         log = self.getLogger()
