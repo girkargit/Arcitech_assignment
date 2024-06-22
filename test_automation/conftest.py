@@ -32,7 +32,8 @@ def login_setup(request):
     request.cls.driver = driver
     driver.refresh()
     yield
-    pass
+    time.sleep(2)
+    driver.quit()
 
 
 @pytest.mark.hookwrapper
@@ -59,3 +60,13 @@ def pytest_runtest_makereport(item):
 
 def _capture_screenshot(name):
     driver.get_screenshot_as_file(name)
+
+
+@pytest.hookimpl(tryfirst=True)
+def pytest_exception_interact(node, call, report):
+    if report.failed:
+        with open("logfile.log", "r") as f:
+            pytest_html = node.config.pluginmanager.getplugin('html')
+            extra = getattr(report, 'extra', [])
+            extra.append(pytest_html.extras.text(f.read(), 'Log file'))
+            report.extra = extra

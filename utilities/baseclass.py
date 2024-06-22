@@ -5,12 +5,13 @@ import inspect
 from selenium.common import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import Select
 
 
 @pytest.mark.usefixtures("login_setup")
 class BaseClass:
 
-    def is_element_displayed(self, txt, timeout=5):
+    def is_element_displayed(self, txt, timeout=10):
         try:
             element = WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located(txt))
             return element.is_displayed()
@@ -40,3 +41,6 @@ class BaseClass:
         logger.setLevel(logging.DEBUG)
         return logger
 
+    def static_drop_down(self, dropdown_element, value):
+        select = Select(dropdown_element)
+        select.select_by_value(value)

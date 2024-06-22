@@ -7,10 +7,12 @@ from utilities.baseclass import *
 class TestSignUp(BaseClass):
 
     def test_landed_url(self):
-        print("----- %s -----" % self.get_url())
+        log = self.getLogger()
+        log.info("----- %s -----" % self.get_url())
         assert "https://proschool.ai/" == self.get_url()
 
     def test_sign_up_process(self):
+        log = self.getLogger()
         obj = WebElement(self.driver)
         obj.login_signup_button().click()
         obj.signup_button().click()
@@ -25,5 +27,5 @@ class TestSignUp(BaseClass):
         else:
             time.sleep(1)
             obj.resend_code_verification().click()
-        assert "Student Profile" in obj.home_text().text
-
+        log.info("----- Sign up successfully. -----")
+        assert True == self.is_element_displayed(obj.create_profile_text())
