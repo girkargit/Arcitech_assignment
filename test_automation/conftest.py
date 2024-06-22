@@ -11,10 +11,6 @@ from selenium.webdriver.chrome.service import Service
 @pytest.fixture(scope="class")
 def login_setup(request):
     """
-    Browsing invoking process and enter mobile number and OTP.
-    :return: This function will return driver as a object.
-    """
-    """
     For updated Selenium no need to give chrom driver path. Need to place chrome driver
     in python default folder.
     """
